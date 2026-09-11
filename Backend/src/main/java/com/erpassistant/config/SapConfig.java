@@ -1,0 +1,30 @@
+package com.erpassistant.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestClient;
+
+@Configuration
+@ConditionalOnProperty(
+        name = "sap.s4hana.enabled",
+        havingValue = "true"
+)
+public class SapConfig {
+
+    @Value("${sap.s4hana.base-url}")
+    private String baseUrl;
+
+    @Value("${sap.s4hana.api-key}")
+    private String apiKey;
+
+    @Bean
+    public RestClient sapRestClient() {
+        return RestClient.builder()
+                .baseUrl(baseUrl)
+                .defaultHeader("APIKey", apiKey)
+                .defaultHeader("DataServiceVersion", "2.0")
+                .build();
+    }
+}
