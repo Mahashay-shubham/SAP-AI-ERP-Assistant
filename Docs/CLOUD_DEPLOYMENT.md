@@ -1,8 +1,8 @@
-# Phase 13 — SAP BTP / Cloud Deployment
+# Phase 14 — SAP BTP / Cloud Deployment
 
 ## 1. Objective
 
-The objective of Phase 13 was to deploy the SAP AI ERP Assistant application from the local development environment to SAP Business Technology Platform (SAP BTP).
+The objective of Phase 14 was to deploy the SAP AI ERP Assistant application from the local development environment to SAP Business Technology Platform (SAP BTP).
 
 The application was deployed using the Cloud Foundry environment available in SAP BTP.
 
@@ -11,6 +11,8 @@ The deployment includes:
 - React frontend
 - Spring Boot backend
 - REST API communication
+- PostgreSQL cloud database
+- JWT-based authentication and role-based authorization
 - SAP BTP Cloud Foundry hosting
 
 ---
@@ -21,9 +23,9 @@ The application was deployed to the SAP BTP Cloud Foundry environment.
 
 ### Cloud Foundry Details
 
-- Organization: 459b8bd0trial
-- Space: dev
-- Region: ap21
+- Organization: `459b8bd0trial`
+- Space: `dev`
+- Region: `ap21`
 - Deployment Platform: SAP BTP Cloud Foundry
 
 ---

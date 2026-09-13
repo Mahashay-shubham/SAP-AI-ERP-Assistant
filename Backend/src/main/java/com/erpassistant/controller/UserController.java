@@ -36,4 +36,19 @@ public class UserController {
                 "User role updated successfully"
         );
     }
+
+    @PutMapping("/{userId}/name")
+    public ResponseEntity<String> updateUserName(
+            @PathVariable Long userId,
+            @RequestBody java.util.Map<String, String> request) {
+
+        userService.updateUserName(
+                userId,
+                request.get("name")
+        );
+
+        return ResponseEntity.ok(
+                "User name updated successfully"
+        );
+    }
 }

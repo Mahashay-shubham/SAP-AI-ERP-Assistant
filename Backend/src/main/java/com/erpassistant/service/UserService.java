@@ -36,4 +36,14 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public User updateUserName(Long userId, String newName) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setName(newName);
+
+        return userRepository.save(user);
+    }
 }
