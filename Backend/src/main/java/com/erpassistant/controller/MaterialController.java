@@ -47,6 +47,7 @@ public class MaterialController {
     }
 
     @PutMapping("/{id}/stock")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public Material updateStock(
         @PathVariable Long id,
         @RequestParam Integer newStock) {
@@ -55,6 +56,7 @@ public class MaterialController {
     }
 
     @GetMapping("/{id}/reorder-recommendation")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public Integer getReorderRecommendation(@PathVariable Long id) {
     return materialService.getRecommendedReorderQuantity(id);
     }
@@ -72,6 +74,7 @@ public class MaterialController {
     }
 
     @PutMapping("/{materialId}/vendor/{vendorId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public Material assignVendor(
         @PathVariable Long materialId,
         @PathVariable Long vendorId) {
@@ -80,6 +83,7 @@ public class MaterialController {
     }
 
     @PutMapping("/{id}/consume")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public Material consumeStock(
         @PathVariable Long id,
         @RequestParam Integer quantity) {

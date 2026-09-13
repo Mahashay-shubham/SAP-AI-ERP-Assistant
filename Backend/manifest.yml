@@ -1,0 +1,6 @@
+applications:
+  - name: sap-ai-erp-backend
+    memory: 1G
+    path: target/backend-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - sap_java_buildpack_jakarta

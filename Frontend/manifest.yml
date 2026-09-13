@@ -1,0 +1,6 @@
+applications:
+  - name: sap-ai-erp-frontend
+    memory: 256M
+    path: dist
+    buildpacks:
+      - staticfile_buildpack

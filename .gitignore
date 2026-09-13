@@ -24,3 +24,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Spring Boot generated build output
+Backend/BOOT-INF/

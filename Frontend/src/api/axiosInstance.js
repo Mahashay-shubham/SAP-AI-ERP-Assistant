@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'https://sap-ai-erp-backend.cfapps.ap21.hana.ondemand.com',
   headers: {
     'Content-Type': 'application/json',
   },
