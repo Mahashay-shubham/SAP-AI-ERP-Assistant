@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import axiosInstance from '../api/axiosInstance'
 
-function Login() {
-  const { login } = useAuth()
+function Register() {
   const navigate = useNavigate()
+
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
@@ -19,17 +21,23 @@ function Login() {
     setLoading(true)
 
     try {
-      const response = await login(email, password)
+      await axiosInstance.post('/api/auth/register', {
+        name,
+        email,
+        password
+      })
 
-      console.log('Login response:', response)
+      setSuccess('Account created successfully. You can now sign in.')
 
-      setSuccess('Login successful')
-      navigate('/dashboard')
+      setTimeout(() => {
+        navigate('/')
+      }, 1500)
     } catch (error) {
-      console.error('Login error:', error)
+      console.error('Registration error:', error)
 
       const message =
-        error.response?.data?.message || 'Login failed. Please try again.'
+        error.response?.data?.message ||
+        'Registration failed. Please try again.'
 
       setError(message)
     } finally {
@@ -47,11 +55,30 @@ function Login() {
           </h1>
 
           <p className="mt-2 text-gray-500">
-            Sign in to your ERP workspace
+            Create your ERP account
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Name
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Enter your name"
+              required
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+            />
+          </div>
 
           <div>
             <label
@@ -85,8 +112,9 @@ function Login() {
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="Enter your password"
+              placeholder="Create a password"
               required
+              minLength={6}
               className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
           </div>
@@ -108,22 +136,22 @@ function Login() {
             disabled={loading}
             className="w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Creating account...' : 'Create Account'}
           </button>
 
         </form>
 
         <div className="mt-6 text-center">
           <span className="text-sm text-gray-500">
-            Don't have an account?{' '}
+            Already have an account?{' '}
           </span>
 
           <button
             type="button"
-            onClick={() => navigate('/register')}
+            onClick={() => navigate('/')}
             className="text-sm font-semibold text-blue-600 hover:text-blue-700"
           >
-            Sign Up
+            Sign In
           </button>
         </div>
 
@@ -132,4 +160,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Register
